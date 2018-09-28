@@ -17,13 +17,6 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     public static final String Database_Name = "Store.db";
     public static final String Cart_Table_Name = "cart";
 
-    //Store
-    private static final String TABLE_NAME = "item";
-    private static final String COLUMN_ID = "id";
-    private static final String COLUMN_NAME = "name";
-    private static final String COLUMN_SECTION = "section";
-    private static final String COLUMN_JOIN_DATE = "joiningdate";
-    private static final String COLUMN_PRICE = "price";
 
 
     private static final String User_TABLE_CREATE =
@@ -41,24 +34,6 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                     columNames.itemTable.Item_Section + " TEXT, " +
                     columNames.itemTable.Item_JDate + " DATETIME, " +
                     columNames.itemTable.Item_Price + " INTEGER )";
-
-//    private static final String Stock_TABLE_CREATE =
-//            "CREATE TABLE " + columNames.stockTable.Stock_Table+ " (" +
-//                    columNames.stockTable.Stock_Id + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
-//                    columNames.stockTable.Stock_Name + " TEXT, " +
-//                    columNames.stockTable.Stock_Description + " TEXT, " +
-//                    columNames.stockTable.Stock_Price + " INTEGER )";
-
-    //Store
-//    String sql = "CREATE TABLE " + TABLE_NAME + " (\n" +
-//            "    " + COLUMN_ID + " INTEGER NOT NULL CONSTRAINT item_pk PRIMARY KEY AUTOINCREMENT,\n" +
-//            "    " + COLUMN_NAME + " varchar(200) NOT NULL,\n" +
-//            "    " + COLUMN_SECTION + " varchar(200) NOT NULL,\n" +
-//            "    " + COLUMN_JOIN_DATE + " datetime NOT NULL,\n" +
-//            "    " + COLUMN_PRICE + " double NOT NULL\n" +
-//            ");";
-
-//    String sql = "create table item ( id INTEGER NOT NULL CONSTRAINT item_pk PRIMARY KEY AUTOINCREMENT ,name varchar(200) NOT NULL, section varchar(200) NOT NULL , joiningdate datetime NOT NULL , price NOT NULL )";
 
 
     public DatabaseHelper(Context context) {
@@ -85,8 +60,6 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
         db.execSQL("DROP TABLE IF EXISTS " + columNames.itemTable.Item_Table);
         db.execSQL("DROP TABLE IF EXISTS " + columNames.userTable.User_Table);
-//        String sql = "DROP TABLE IF EXISTS " + TABLE_NAME + ";";
-//        db.execSQL(sql);
         onCreate(db);
 
 
@@ -108,22 +81,6 @@ public class DatabaseHelper extends SQLiteOpenHelper {
             return true;
     }
 
-//    public boolean addStoreItems(String sName, String sDescription, Integer price) {
-//        SQLiteDatabase db = this.getWritableDatabase();
-//        ContentValues contentValues = new ContentValues();
-//        contentValues.put(columNames.stockTable.Stock_Name, sName);
-//        contentValues.put(columNames.stockTable.Stock_Description, sDescription);
-//        contentValues.put(columNames.stockTable.Stock_Price, price);
-//        //contentValues.put(columNames.stockTable.Stock_Photo, pic);
-//
-//        long result = db.insert(columNames.stockTable.Stock_Table, null, contentValues);
-//
-//        if (result == -1)
-//            return false;
-//        else
-//            return true;
-//    }
-
 
     public boolean valUser(String email, String pass) {
         SQLiteDatabase db = this.getWritableDatabase();
@@ -137,11 +94,11 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         }
     }
 
-    public columNames getUserDetails(String id) {
+    public columNames getUserDetails(Integer id) {
         // get readable database as we are not inserting anything
         SQLiteDatabase db = this.getReadableDatabase();
 
-        Cursor cursor = db.rawQuery("select * from user where uid = ?",new String[]{id});
+        Cursor cursor = db.rawQuery("select * from user where uid = ?",new String[]{String.valueOf(id)});
 
         if (cursor != null)
             cursor.moveToFirst();
@@ -156,6 +113,21 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         cursor.close();
 
         return u;
+    }
+
+    boolean updateUser(int id, String name, String email, String address, int phone) {
+        SQLiteDatabase db = getWritableDatabase();
+        ContentValues contentValues = new ContentValues();
+        contentValues.put(columNames.userTable.User_Name, name);
+        contentValues.put(columNames.userTable.User_email, email);
+        contentValues.put(columNames.userTable.User_Address, address);
+        contentValues.put(columNames.userTable.User_Mobile, phone);
+        return db.update(columNames.userTable.User_Table, contentValues, columNames.userTable.User_Id + "=?", new String[]{String.valueOf(id)}) == 1;
+    }
+
+    boolean deleteUser(int id) {
+        SQLiteDatabase db = getWritableDatabase();
+        return db.delete(columNames.userTable.User_Table, columNames.userTable.User_Table + "=?", new String[]{String.valueOf(id)}) == 1;
     }
 
 

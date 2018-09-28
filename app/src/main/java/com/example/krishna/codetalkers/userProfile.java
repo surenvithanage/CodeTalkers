@@ -1,6 +1,7 @@
 package com.example.krishna.codetalkers;
 
 import android.content.Intent;
+import android.database.Cursor;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -13,9 +14,21 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.TextView;
+import android.widget.Toast;
 
 public class userProfile extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
+    DatabaseHelper db;
+    public EditText name;
+    public EditText email;
+    public EditText phone;
+    public EditText addr;
+    public Button update;
+    public Button delete;
+    public  Integer pid ; //Get Id from the Session
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -24,14 +37,6 @@ public class userProfile extends AppCompatActivity
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-//        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-//        fab.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-//                        .setAction("Action", null).show();
-//            }
-//        });
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
@@ -42,6 +47,15 @@ public class userProfile extends AppCompatActivity
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
         setTitle("User Profile");
+
+
+
+
+        name = findViewById(R.id.uname);
+        email = findViewById(R.id.uEmail);
+        phone = findViewById(R.id.uPhone);
+        addr = findViewById(R.id.uAddress);
+        update();
     }
 
     @Override
@@ -95,6 +109,7 @@ public class userProfile extends AppCompatActivity
             case R.id.uprofile:
                 Intent g = new Intent(userProfile.this, userProfile.class);
                 startActivity(g);
+                displayDetails();
                 break;
             case R.id.cart:
                 Intent s = new Intent(userProfile.this, cart.class);
@@ -104,5 +119,54 @@ public class userProfile extends AppCompatActivity
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
+    }
+
+    public  void displayDetails(){
+
+
+
+        columNames us = db.getUserDetails(pid);
+
+            name.setText("");
+            name.append(us.getName());
+            email.setText("");
+            email.append(us.getEmail());
+            phone.setText("");
+            phone.append(us.getPhone());
+            addr.append(us.getAddress());
+
+
+
+
+    }
+    public  void update(){
+        update.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(db.updateUser(pid,name.getText().toString(),email.getText().toString(),addr.getText().toString(),Integer.valueOf(phone.getText().toString()))){
+                    Toast.makeText(getApplicationContext(), "Updated Successfully", Toast.LENGTH_LONG).show();
+
+                }
+                else
+                    Toast.makeText(getApplicationContext(), "Updated Failed", Toast.LENGTH_LONG).show();
+
+
+
+            }
+        });
+    }
+    public  void delete(){
+        delete.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(db.deleteUser(pid)) {
+                    Toast.makeText(getApplicationContext(), "Deleted Successfully", Toast.LENGTH_LONG).show();
+                }
+                else {
+                    Toast.makeText(getApplicationContext(), "Delete Failed", Toast.LENGTH_LONG).show();
+
+                }
+            }
+        });
     }
 }
