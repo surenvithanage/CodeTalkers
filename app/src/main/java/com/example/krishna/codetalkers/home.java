@@ -94,6 +94,10 @@ public class home extends AppCompatActivity
             case R.id.cart:
                 Intent s = new Intent(home.this, cart.class);
                 startActivity(s);
+            case R.id.store:
+                Intent su = new Intent(home.this, storeMain.class);
+                startActivity(su);
+
         }
 
                 DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
