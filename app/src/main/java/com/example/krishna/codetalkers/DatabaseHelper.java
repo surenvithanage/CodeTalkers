@@ -17,6 +17,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     public static final String Database_Name = "Store.db";
     public static final String Cart_Table_Name = "cart";
 
+    private static String idUser = "1";
     //Store
     private static final String TABLE_NAME = "item";
     private static final String COLUMN_ID = "id";
@@ -137,11 +138,12 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         }
     }
 
-    public columNames getUserDetails(String id) {
+    //Display user details
+    public columNames getUserDetails(String idUser) {
         // get readable database as we are not inserting anything
         SQLiteDatabase db = this.getReadableDatabase();
 
-        Cursor cursor = db.rawQuery("select * from user where uid = ?",new String[]{id});
+        Cursor cursor = db.rawQuery("select * from user where uid = ?",new String[]{idUser});
 
         if (cursor != null)
             cursor.moveToFirst();
