@@ -53,7 +53,7 @@ public class insertItems extends AppCompatActivity
         ides = findViewById(R.id.itDescription);
         iprice = findViewById(R.id.itprice);
         insert = findViewById(R.id.insertItem);
-        addItem();
+        //addItem();
 
 
     }
@@ -120,36 +120,36 @@ public class insertItems extends AppCompatActivity
         return true;
     }
 
-    public void addItem(){
+//    public void addItem(){
+//
+//        insert.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                String name = iname.getText().toString();
+//                String des = ides.getText().toString();
+//                Integer price = Integer.parseInt(iprice.getText().toString());
+//
+//                if(name.length() == 0 || des.length() == 0 || price == 0){
+//                    Toast.makeText(getApplicationContext(), "Complete The Fields", Toast.LENGTH_LONG).show();
+//                }
+//                else{
+//                    boolean isInserted = dbhelper.addStoreItems(name,des,price);
+//                    if (isInserted) {
+//                        Toast.makeText(getApplicationContext(), "Successfully Added", Toast.LENGTH_LONG).show();
+//                        Intent j = new Intent(insertItems.this, store.class);
+//                        startActivity(j);
+//
+//                    } else {
+//                        Toast.makeText(getApplicationContext(), "Adding Failed", Toast.LENGTH_LONG).show();
+//                        Intent k = new Intent(insertItems.this, insertItems.class);
+//                        startActivity(k);
+//                    }
+//
+//
+//                }
+//
+//            }
+//        });
 
-        insert.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                String name = iname.getText().toString();
-                String des = ides.getText().toString();
-                Integer price = Integer.parseInt(iprice.getText().toString());
-
-                if(name.length() == 0 || des.length() == 0 || price == 0){
-                    Toast.makeText(getApplicationContext(), "Complete The Fields", Toast.LENGTH_LONG).show();
-                }
-                else{
-                    boolean isInserted = dbhelper.addStoreItems(name,des,price);
-                    if (isInserted) {
-                        Toast.makeText(getApplicationContext(), "Successfully Added", Toast.LENGTH_LONG).show();
-                        Intent j = new Intent(insertItems.this, store.class);
-                        startActivity(j);
-
-                    } else {
-                        Toast.makeText(getApplicationContext(), "Adding Failed", Toast.LENGTH_LONG).show();
-                        Intent k = new Intent(insertItems.this, insertItems.class);
-                        startActivity(k);
-                    }
-
-
-                }
-
-            }
-        });
-
-    }
+//    }
 }

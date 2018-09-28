@@ -35,11 +35,19 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                     columNames.userTable.User_Password + " TEXT, " + columNames.userTable.User_Mobile + " Integer)";
 
     private static final String Stock_TABLE_CREATE =
-            "CREATE TABLE " + columNames.stockTable.Stock_Table+ " (" +
-                    columNames.stockTable.Stock_Id + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
-                    columNames.stockTable.Stock_Name + " TEXT, " +
-                    columNames.stockTable.Stock_Description + " TEXT, " +
-                    columNames.stockTable.Stock_Price + " INTEGER )";
+            "CREATE TABLE " + columNames.itemTable.Item_Table+ " (" +
+                    columNames.itemTable.Item_Id + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
+                    columNames.itemTable.Item_Name + " TEXT, " +
+                    columNames.itemTable.Item_Section + " TEXT, " +
+                    columNames.itemTable.Item_JDate + " DATETIME, " +
+                    columNames.itemTable.Item_Price + " INTEGER )";
+
+//    private static final String Stock_TABLE_CREATE =
+//            "CREATE TABLE " + columNames.stockTable.Stock_Table+ " (" +
+//                    columNames.stockTable.Stock_Id + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
+//                    columNames.stockTable.Stock_Name + " TEXT, " +
+//                    columNames.stockTable.Stock_Description + " TEXT, " +
+//                    columNames.stockTable.Stock_Price + " INTEGER )";
 
     //Store
 //    String sql = "CREATE TABLE " + TABLE_NAME + " (\n" +
@@ -50,7 +58,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 //            "    " + COLUMN_PRICE + " double NOT NULL\n" +
 //            ");";
 
-    String sql = "create table item ( id INTEGER NOT NULL CONSTRAINT item_pk PRIMARY KEY AUTOINCREMENT ,name varchar(200) NOT NULL, section varchar(200) NOT NULL , joiningdate datetime NOT NULL , price NOT NULL )";
+//    String sql = "create table item ( id INTEGER NOT NULL CONSTRAINT item_pk PRIMARY KEY AUTOINCREMENT ,name varchar(200) NOT NULL, section varchar(200) NOT NULL , joiningdate datetime NOT NULL , price NOT NULL )";
 
 
     public DatabaseHelper(Context context) {
@@ -62,8 +70,8 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     public void onCreate(SQLiteDatabase db) {
         //Stock Table
         db.execSQL(Stock_TABLE_CREATE);
-        //Item Table
-        db.execSQL(sql);
+//        //Item Table
+//        db.execSQL(sql);
         //User Table
         db.execSQL(User_TABLE_CREATE);
 
@@ -75,10 +83,10 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
 
-        db.execSQL("DROP TABLE IF EXISTS " + stockTable.Stock_Table);
+        db.execSQL("DROP TABLE IF EXISTS " + columNames.itemTable.Item_Table);
         db.execSQL("DROP TABLE IF EXISTS " + columNames.userTable.User_Table);
-        String sql = "DROP TABLE IF EXISTS " + TABLE_NAME + ";";
-        db.execSQL(sql);
+//        String sql = "DROP TABLE IF EXISTS " + TABLE_NAME + ";";
+//        db.execSQL(sql);
         onCreate(db);
 
 
@@ -100,21 +108,21 @@ public class DatabaseHelper extends SQLiteOpenHelper {
             return true;
     }
 
-    public boolean addStoreItems(String sName, String sDescription, Integer price) {
-        SQLiteDatabase db = this.getWritableDatabase();
-        ContentValues contentValues = new ContentValues();
-        contentValues.put(columNames.stockTable.Stock_Name, sName);
-        contentValues.put(columNames.stockTable.Stock_Description, sDescription);
-        contentValues.put(columNames.stockTable.Stock_Price, price);
-        //contentValues.put(columNames.stockTable.Stock_Photo, pic);
-
-        long result = db.insert(columNames.stockTable.Stock_Table, null, contentValues);
-
-        if (result == -1)
-            return false;
-        else
-            return true;
-    }
+//    public boolean addStoreItems(String sName, String sDescription, Integer price) {
+//        SQLiteDatabase db = this.getWritableDatabase();
+//        ContentValues contentValues = new ContentValues();
+//        contentValues.put(columNames.stockTable.Stock_Name, sName);
+//        contentValues.put(columNames.stockTable.Stock_Description, sDescription);
+//        contentValues.put(columNames.stockTable.Stock_Price, price);
+//        //contentValues.put(columNames.stockTable.Stock_Photo, pic);
+//
+//        long result = db.insert(columNames.stockTable.Stock_Table, null, contentValues);
+//
+//        if (result == -1)
+//            return false;
+//        else
+//            return true;
+//    }
 
 
     public boolean valUser(String email, String pass) {
@@ -154,31 +162,36 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     //Store
     boolean addItem(String name, String section, String joiningdate, double price) {
         ContentValues contentValues = new ContentValues();
-        contentValues.put(COLUMN_NAME, name);
-        contentValues.put(COLUMN_SECTION, section);
-        contentValues.put(COLUMN_JOIN_DATE, joiningdate);
-        contentValues.put(COLUMN_PRICE, price);
+        contentValues.put(columNames.itemTable.Item_Name, name);
+        contentValues.put(columNames.itemTable.Item_Section, section);
+        contentValues.put(columNames.itemTable.Item_JDate, joiningdate);
+        contentValues.put(columNames.itemTable.Item_Price, price);
         SQLiteDatabase db = getWritableDatabase();
-        return db.insert("item", null, contentValues) != -1;
+        long result = db.insert(columNames.itemTable.Item_Table, null, contentValues);
+
+        if (result == -1)
+            return false;
+        else
+            return true;
     }
 
     Cursor getAllItem() {
         SQLiteDatabase db = getReadableDatabase();
-        return db.rawQuery("SELECT * FROM " + TABLE_NAME, null);
+        return db.rawQuery("SELECT * FROM " + columNames.itemTable.Item_Table, null);
     }
 
     boolean updateItem(int id, String name, String section, double price) {
         SQLiteDatabase db = getWritableDatabase();
         ContentValues contentValues = new ContentValues();
-        contentValues.put(COLUMN_NAME, name);
-        contentValues.put(COLUMN_SECTION, section);
-        contentValues.put(COLUMN_PRICE, price);
-        return db.update(TABLE_NAME, contentValues, COLUMN_ID + "=?", new String[]{String.valueOf(id)}) == 1;
+        contentValues.put(columNames.itemTable.Item_Name, name);
+        contentValues.put(columNames.itemTable.Item_Section, section);
+        contentValues.put(columNames.itemTable.Item_Price, price);
+        return db.update(columNames.itemTable.Item_Table, contentValues, columNames.itemTable.Item_Id + "=?", new String[]{String.valueOf(id)}) == 1;
     }
 
     boolean deleteItem(int id) {
         SQLiteDatabase db = getWritableDatabase();
-        return db.delete(TABLE_NAME, COLUMN_ID + "=?", new String[]{String.valueOf(id)}) == 1;
+        return db.delete(columNames.itemTable.Item_Table, columNames.itemTable.Item_Id + "=?", new String[]{String.valueOf(id)}) == 1;
     }
 }
 
