@@ -35,8 +35,6 @@ public class signIn extends AppCompatActivity {
                     String email = pemail.getText().toString();
                     String pwd = ppass.getText().toString();
 
-                    System.out.println("Email : " + email);
-
                     //if(db.checkUser(email)) {
                         if (db.valUser(email, pwd)) {
                             Intent i = new Intent(signIn.this, home.class);
