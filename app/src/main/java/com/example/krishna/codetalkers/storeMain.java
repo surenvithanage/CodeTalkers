@@ -45,7 +45,7 @@ public class storeMain extends AppCompatActivity implements View.OnClickListener
         }
 
         if (price.isEmpty()) {
-            editTextPrice.setError("Salary can't be empty");
+            editTextPrice.setError("Price can't be empty");
             editTextPrice.requestFocus();
             return;
         }
@@ -56,9 +56,9 @@ public class storeMain extends AppCompatActivity implements View.OnClickListener
 
         //adding the employee with the DatabaseManager instance
         if (mDatabase.addItem(name, session, joiningDate, Double.parseDouble(price)))
-            Toast.makeText(this, "Employee Added", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "Item Added", Toast.LENGTH_SHORT).show();
         else
-            Toast.makeText(this, "Could not add employee", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "Could not add Item", Toast.LENGTH_SHORT).show();
 
     }
 

@@ -50,6 +50,26 @@ public class signUp extends AppCompatActivity {
                     String rpwd = frpwd.getText().toString();
 
                     if (pwd.equals(rpwd)){
+                        if (uname.isEmpty()) {
+                            fname.setError("Name can't be empty");
+                            fname.requestFocus();
+                            return;
+                        }
+                        if (email.isEmpty()) {
+                            femail.setError("Email can't be empty");
+                            femail.requestFocus();
+                            return;
+                        }
+                        if (address.isEmpty()) {
+                            faddress.setError("Address can't be empty");
+                            faddress.requestFocus();
+                            return;
+                        }
+                        if (pwd.isEmpty()) {
+                            frpwd.setError("Password can't be empty");
+                            frpwd.requestFocus();
+                            return;
+                        }
                         boolean isInserted = db.userinsertdata(uname, email, address, pwd);
                         if (isInserted == true) {
                             Toast.makeText(getApplicationContext(), "Registration Successfull", Toast.LENGTH_LONG).show();

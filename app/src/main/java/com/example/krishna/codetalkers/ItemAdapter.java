@@ -103,7 +103,7 @@ public class ItemAdapter extends ArrayAdapter<ItemBean> {
                 }
 
                 if (salary.isEmpty()) {
-                    editTextSalary.setError("Salary can't be empty");
+                    editTextSalary.setError("Price can't be empty");
                     editTextSalary.requestFocus();
                     return;
                 }
@@ -111,7 +111,7 @@ public class ItemAdapter extends ArrayAdapter<ItemBean> {
 
                 //calling the update method from database manager instance
                 if (mDatabase.updateItem(item.getId(), name, dept, Double.valueOf(salary))) {
-                    Toast.makeText(mCtx, "Employee Updated", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(mCtx, "Item Updated", Toast.LENGTH_SHORT).show();
                     loadItemFromDatabaseAgain();
                 }
                 alertDialog.dismiss();

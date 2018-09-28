@@ -35,8 +35,16 @@ public class signIn extends AppCompatActivity {
                     String email = pemail.getText().toString();
                     String pwd = ppass.getText().toString();
 
-                    System.out.println("Email : " + email);
-
+                    if (email.isEmpty()) {
+                        pemail.setError("Email can't be empty");
+                        pemail.requestFocus();
+                        return;
+                    }
+                    if (pwd.isEmpty()) {
+                        ppass.setError("Pasword can't be empty");
+                        ppass.requestFocus();
+                        return;
+                    }
                     //if(db.checkUser(email)) {
                         if (db.valUser(email, pwd)) {
                             Intent i = new Intent(signIn.this, home.class);
