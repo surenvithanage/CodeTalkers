@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
-    tools:context=".home"
+    tools:context=".store"
     tools:showIn="@layout/app_bar_home">
 
 
@@ -17,10 +17,10 @@
         android:layout_alignParentTop="true"
         android:layout_marginTop="150dp"
         android:gravity="center"
-        android:text="@string/home"
+        android:text="@string/store"
         tools:ignore="MissingConstraints"
         tools:layout_editor_absoluteX="162dp"
         tools:layout_editor_absoluteY="246dp"
-        android:layout_alignParentLeft="true" />
+        android:layout_alignParentLeft="true" />>
 
 </android.support.constraint.ConstraintLayout>

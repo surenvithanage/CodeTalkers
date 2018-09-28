@@ -60,11 +60,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/logi"
         app:layout_constraintVertical_bias="0.283"
-        android:background="@drawable/btnprop"
-        android:shadowColor="@android:color/black"
-        android:shadowDx="6"
-        android:shadowDy="10"
-        android:shadowRadius="12"/>
+        android:background="@drawable/btnprop"/>
 
     <TextView
         android:id="@+id/test"

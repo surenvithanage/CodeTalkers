@@ -12,6 +12,7 @@ public class main extends AppCompatActivity {
     public Button psin;
     public Button psup;
     public TextView homee;
+    DatabaseHelper StoreDb;
 
     public void goLog(){
         psin = (Button)findViewById(R.id.logi);
@@ -60,6 +61,7 @@ public class main extends AppCompatActivity {
         goLog();
         goSup();
         thome();
+        StoreDb = new DatabaseHelper(this);
     }
 
 
