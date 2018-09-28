@@ -41,10 +41,10 @@
             android:text="Add Item"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.557"
+            app:layout_constraintHorizontal_bias="0.457"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/itprice"
-            app:layout_constraintVertical_bias="0.56" />
+            app:layout_constraintVertical_bias="0.487" />
 
         <EditText
             android:id="@+id/itName"
@@ -59,10 +59,10 @@
             android:hint="Name Of the Book"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.734"
+            app:layout_constraintHorizontal_bias="0.504"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.216" />
+            app:layout_constraintVertical_bias="0.217" />
 
         <EditText
             android:id="@+id/itDescription"
@@ -76,16 +76,16 @@
             android:hint="Description"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.734"
+            app:layout_constraintHorizontal_bias="0.504"
 
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/itName"
-            app:layout_constraintVertical_bias="0.11" />
+            app:layout_constraintVertical_bias="0.077" />
 
         <EditText
             android:id="@+id/itprice"
             android:layout_width="255dp"
-            android:layout_height="50dp"
+            android:layout_height="46dp"
             android:layout_marginStart="8dp"
             android:layout_marginLeft="8dp"
             android:layout_marginTop="8dp"
@@ -97,11 +97,11 @@
             android:inputType="number"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.734"
+            app:layout_constraintHorizontal_bias="0.504"
 
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/itDescription"
-            app:layout_constraintVertical_bias="0.16" />
+            app:layout_constraintVertical_bias="0.122" />
 
 
     </android.support.constraint.ConstraintLayout>

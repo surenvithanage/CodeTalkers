@@ -1,9 +1,6 @@
 package com.example.krishna.codetalkers;
 
 import android.content.Intent;
-import android.database.Cursor;
-import android.database.sqlite.SQLiteDatabase;
-import android.database.sqlite.SQLiteOpenHelper;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -37,6 +34,8 @@ public class signIn extends AppCompatActivity {
                 public void onClick(View v) {
                     String email = pemail.getText().toString();
                     String pwd = ppass.getText().toString();
+
+                    System.out.println("Email : " + email);
 
                     //if(db.checkUser(email)) {
                         if (db.valUser(email, pwd)) {

@@ -47,7 +47,7 @@ public class insertItems extends AppCompatActivity
         navigationView.setNavigationItemSelectedListener(this);
 
 
-        db = dbhelper.getWritableDatabase();
+       // db = dbhelper.getWritableDatabase();
 
         iname = findViewById(R.id.itName);
         ides = findViewById(R.id.itDescription);
@@ -125,16 +125,16 @@ public class insertItems extends AppCompatActivity
         insert.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String name = iname.getText().toString().trim();
-                String des = ides.getText().toString().trim();
-                Integer price = Integer.valueOf(iprice.getText().toString().trim());
+                String name = iname.getText().toString();
+                String des = ides.getText().toString();
+                Integer price = Integer.parseInt(iprice.getText().toString());
 
-                if(name.length() == 0 || des.length() == 0 || price.equals("0")){
+                if(name.length() == 0 || des.length() == 0 || price == 0){
                     Toast.makeText(getApplicationContext(), "Complete The Fields", Toast.LENGTH_LONG).show();
                 }
                 else{
                     boolean isInserted = dbhelper.addStoreItems(name,des,price);
-                    if (isInserted == true) {
+                    if (isInserted) {
                         Toast.makeText(getApplicationContext(), "Successfully Added", Toast.LENGTH_LONG).show();
                         Intent j = new Intent(insertItems.this, store.class);
                         startActivity(j);

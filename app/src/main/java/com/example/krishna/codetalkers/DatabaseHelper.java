@@ -7,7 +7,7 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.widget.Toast;
 
-import com.example.krishna.codetalkers.columNames.stockTable;
+
 
 import java.sql.Blob;
 
@@ -28,11 +28,11 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                     columNames.userTable.User_Password + " TEXT, " + columNames.userTable.User_Mobile + " Integer)";
 
     private static final String Stock_TABLE_CREATE =
-            "CREATE TABLE " + stockTable.Stock_Name + " (" +
-                    stockTable.Stock_Id + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
-                    stockTable.Stock_Name + " TEXT, " +
-                    stockTable.Stock_Description + " TEXT, " +
-                    stockTable.Stock_Price + " TEXT)";
+            "CREATE TABLE " + columNames.stockTable.Stock_Table+ " (" +
+                    columNames.stockTable.Stock_Id + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
+                    columNames.stockTable.Stock_Name + " TEXT, " +
+                    columNames.stockTable.Stock_Description + " TEXT, " +
+                    columNames.stockTable.Stock_Price + " INTEGER )";
 
 
     public DatabaseHelper(Context context) {
@@ -54,7 +54,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
 
-        db.execSQL("DROP TABLE IF EXISTS " + stockTable.Stock_Table);
+        db.execSQL("DROP TABLE IF EXISTS " + columNames.stockTable.Stock_Table);
         db.execSQL("DROP TABLE IF EXISTS " + columNames.userTable.User_Table);
         onCreate(db);
 
@@ -84,7 +84,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         contentValues.put(columNames.stockTable.Stock_Price, price);
         //contentValues.put(columNames.stockTable.Stock_Photo, pic);
 
-        long result = db.insert(columNames.userTable.User_Table, null, contentValues);
+        long result = db.insert(columNames.stockTable.Stock_Table, null, contentValues);
 
         if (result == -1)
             return false;
@@ -94,9 +94,11 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
 
     public boolean valUser(String email, String pass) {
-        SQLiteDatabase db = this.getWritableDatabase();
+        SQLiteDatabase db = this.getReadableDatabase();
 
         Cursor cursor = db.rawQuery(" SELECT * FROM " + columNames.userTable.User_Table + " WHERE " + columNames.userTable.User_email + " =? AND " + columNames.userTable.User_Password+ " =? ", new String[]{email,pass} );
+        //Cursor cursor = db.rawQuery("select * from user where email = ? and Password = ?  ",new String[]{email,pass});
+
         int cCount = cursor.getCount();
         if (cCount > 0) {
             return true;

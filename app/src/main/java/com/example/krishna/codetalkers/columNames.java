@@ -24,7 +24,7 @@ public final class columNames  {
         public static final String Stock_Id = "sId";
         public static final String Stock_Name = "Name";
         public static final String Stock_Description = "Description";
-        public static final String Stock_Price = "Price";
+        public static final String Stock_Price = " Price ";
         public static final String Stock_Photo = "Photo";
     }
 }
