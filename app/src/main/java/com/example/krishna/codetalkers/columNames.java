@@ -28,6 +28,17 @@ public final class columNames  {
         public static final String Stock_Photo = "Photo";
     }
 
+
+    public static  class  itemTable implements BaseColumns{
+        public static final String Item_Table = "item";
+        public static final String Item_Id = "id";
+        public static final String Item_Name = "name";
+        public static final String Item_Section = "section";
+        public static final String Item_JDate = " joiningdate  ";
+        public static final String Item_Price = " price";
+
+    }
+
     private String name;
     private String email;
     private String address;

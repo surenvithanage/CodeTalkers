@@ -90,7 +90,7 @@ public class cart extends AppCompatActivity
                 startActivity(h);
                 break;
             case R.id.shop:
-                Intent i = new Intent(cart.this, store.class);
+                Intent i = new Intent(cart.this, storeMain.class);
                 startActivity(i);
                 break;
             case R.id.uprofile:

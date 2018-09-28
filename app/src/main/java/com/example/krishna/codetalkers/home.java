@@ -84,7 +84,7 @@ public class home extends AppCompatActivity
                 startActivity(h);
                 break;
             case R.id.shop:
-                Intent i = new Intent(home.this, store.class);
+                Intent i = new Intent(home.this, storeMain.class);
                 startActivity(i);
                 break;
             case R.id.uprofile:

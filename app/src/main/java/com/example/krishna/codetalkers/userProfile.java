@@ -89,7 +89,7 @@ public class userProfile extends AppCompatActivity
                 startActivity(h);
                 break;
             case R.id.shop:
-                Intent i = new Intent(userProfile.this, store.class);
+                Intent i = new Intent(userProfile.this, storeMain.class);
                 startActivity(i);
                 break;
             case R.id.uprofile:
