@@ -41,7 +41,11 @@
         <activity
             android:name=".itemView"
             android:label="@string/title_activity_item_view"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity android:name=".storeMain" />
+        <activity android:name=".item" />
+        <activity android:name=".dialog_update_item" />
+        <activity android:name=".layout_item"></activity>
     </application>
 
 </manifest>

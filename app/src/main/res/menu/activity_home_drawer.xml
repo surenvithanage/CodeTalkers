@@ -20,6 +20,10 @@
             android:id="@+id/uprofile"
             android:icon="@drawable/ic_menu_slideshow"
             android:title="@string/profile" />
+        <item
+            android:id="@+id/store"
+            android:icon="@drawable/ic_menu_gallery"
+            android:title="@string/store" />
 
 
 
