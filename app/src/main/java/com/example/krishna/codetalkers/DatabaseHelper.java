@@ -57,9 +57,12 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
+        
+        String query_1 = "DROP TABLE IF EXISTS " + columNames.itemTable.Item_Table;
+        String query_2 = "DROP TABLE IF EXISTS " + columNames.userTable.User_Table;
 
-        db.execSQL("DROP TABLE IF EXISTS " + columNames.itemTable.Item_Table);
-        db.execSQL("DROP TABLE IF EXISTS " + columNames.userTable.User_Table);
+        db.execSQL(query_1);
+        db.execSQL(query_2);
         onCreate(db);
 
 
@@ -159,6 +162,21 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         contentValues.put(columNames.itemTable.Item_Section, section);
         contentValues.put(columNames.itemTable.Item_Price, price);
         return db.update(columNames.itemTable.Item_Table, contentValues, columNames.itemTable.Item_Id + "=?", new String[]{String.valueOf(id)}) == 1;
+    }
+    
+    public ArrayList<ClassName> searchResult(int ID){
+        ArrayList<ClassName> result = new ArrayList<>();
+        SQLiteDatabase db = getWritableDatabase();
+        String sql = "Select * from <TableName> ";
+        Cursor cursor = db.rawQuery(sql,null);
+        if(cursor.moveToFirst(){
+            do{
+                //process here
+            }while(cursor.moveToNext());
+        }
+           
+           return result;
+        
     }
 
     boolean deleteItem(int id) {
